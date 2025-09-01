@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pages:dev": "wrangler pages dev",
+    "worker:dev": "wrangler dev workers/export/worker.ts"
   },
   "dependencies": {
     "react": "^19.1.1",

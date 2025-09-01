@@ -1,0 +1,4 @@
+export type SnapshotV1 = { v:1; game_v:string; seed:number; initial_state?:unknown; actions:Array<{t:number;a:string;[k:string]:number|string|boolean}>; result?:{win?:boolean;score?:number} };
+export type BattleRequest = { game_slug:string; stage_band:number; last_outcome:'W'|'L'|'N'; run_step?:number; client_build:string; opt_out?:boolean; player_setup:{ seed:number; board:number[]; shop_rolls?:number[]; } };
+export type ReplayV1 = { v:1; game_v:string; initial:{player:number[];ghost:number[]}; events:Array<any> };
+export type BattleResponse = { ok:true; result:{win:boolean;score?:number;turns?:number}; ghost_hash:string; replay_id:string; replay:ReplayV1 } | { ok:false; error:string };
