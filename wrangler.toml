@@ -2,6 +2,9 @@ name = "simyou"
 compatibility_date = "2025-08-23"
 pages_build_output_dir = "dist"
 
+[vars]
+ALLOWED_ORIGIN = "https://simyou.ai,https://simyou.pages.dev"
+
 [[d1_databases]]
 binding = "DB"                    
 database_name = "SIMYOU"          
