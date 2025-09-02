@@ -228,3 +228,18 @@
 ### One-liner to remember
 
 **SimYou** = *“tiny async games, server decides, players create the content, and the data helps everyone.”*
+
+---
+
+## Appendix A) Current State vs Plan (Sep 2025)
+
+- Hub UI exists with placeholder game cards and links to `/privacy` and `/research`.
+- API endpoints implemented as stubs:
+  - `/api/session` issues HMAC token for a provided session id.
+  - `/api/battle` validates headers/payload, runs a deterministic stub sim, and returns a replay/result.
+- CORS supports multiple allowed origins via comma-separated `ALLOWED_ORIGIN`. OPTIONS preflights return 204.
+- Storage is stubbed: `_lib/store.ts` does not yet write to D1/KV/R2.
+- Export worker not yet implemented.
+- Build & local dev flow uses: `npm run build` then `npx wrangler pages dev dist`.
+
+What’s next (short): implement real storage in `_lib/store.ts`, wire sim logic, optional `/api/replay/:id`, then export Worker and daily cron.

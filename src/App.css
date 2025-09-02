@@ -1,42 +1,63 @@
 #root {
-  max-width: 1280px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 2rem 1rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.hub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hub-header h1 {
+  margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
+.tagline {
+  margin: 0.25rem 0 0 0;
   color: #888;
+}
+
+.hub-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.games h2 {
+  margin-top: 2rem;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.game-card {
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: left;
+}
+
+.game-card h3 {
+  margin-top: 0;
+}
+
+.soon-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.hub-footer {
+  margin-top: 3rem;
+  text-align: center;
+  color: #888;
+}
+
+.tests {
+  margin-top: 2rem;
 }

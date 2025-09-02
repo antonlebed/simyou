@@ -1,69 +1,69 @@
-# React + TypeScript + Vite
+# SimYou
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tiny async games. Server decides; players create the content. Guest-only; no PII.
 
-Currently, two official plugins are available:
+## Quickstart
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Prereqs: Node 20+, npm, Wrangler.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm i
+npm run build
+# Serve Pages Functions + static output
+npx wrangler pages dev dist
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Environment (local)
+Create `.dev.vars` in project root:
 ```
+SESSION_SECRET="dev-secret-change-me"
+ALLOWED_ORIGIN="http://localhost:5173,http://127.0.0.1:5173"
+```
+- `ALLOWED_ORIGIN` supports a comma-separated list of allowed origins.
+
+## Build & Deploy (Cloudflare Pages)
+- Build command: `npm run build`
+- Output dir: `dist`
+- Functions dir: `functions`
+- Bindings: `DB`, `SIMYOU_CACHE`, `SNAPSHOTS`
+- Env Vars: `ALLOWED_ORIGIN` (comma-separated), Secret: `SESSION_SECRET`
+
+## Schema (D1)
+- Schema lives in `schema.sql`
+- Apply via Dashboard → D1 → Query, or CLI:
+```bash
+wrangler d1 execute SIMYOU --file schema.sql --remote
+```
+
+## APIs (stubbed)
+- `GET /api/session` → returns short-lived HMAC token for the provided session id
+- `POST /api/battle` → validates payload/session, runs deterministic stub sim, returns replay+result
+- OPTIONS preflights return 204 with CORS headers
+
+See `API_REFERENCE.md` for request/response types.
+
+## Hub UI & Smoke Test
+- The hub (`src/App.tsx`) lists games with “Coming soon” buttons.
+- A "Run API smoke test" button calls `/api/session` then `/api/battle` and prints the JSON result.
+- CLI smoke test (alternative):
+```bash
+SESSION=$(uuidgen)
+TOKEN=$(curl -s "http://127.0.0.1:8788/api/session" -H "x-simyou-session: $SESSION" | jq -r .token)
+curl -i "http://127.0.0.1:8788/api/battle" \
+  -H "content-type: application/json" \
+  -H "x-simyou-session: $SESSION" \
+  -H "x-simyou-session-token: $TOKEN" \
+  --data '{
+    "game_slug":"sap-remake",
+    "stage_band":1,
+    "last_outcome":"N",
+    "client_build":"dev",
+    "player_setup":{"seed":42,"board":[1,2,3]}
+  }'
+```
+
+## Next Steps
+- Implement real storage in `functions/_lib/store.ts` (D1/KV/R2)
+- Replace `functions/_lib/sim.ts` with game logic
+- (Optional) `/api/replay/:id`
+- Export worker + daily cron (write JSONL to R2)
