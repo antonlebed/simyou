@@ -1,0 +1,16 @@
+name = "simyou"
+compatibility_date = "2025-08-23"
+pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"                    
+database_name = "SIMYOU"          
+database_id = "30489284-3240-45c5-9b68-16f1ebbbc3fd"
+
+[[kv_namespaces]]
+binding = "SIMYOU_CACHE"
+id = "665693e8605949b78226210fdba9cfe4"
+
+[[r2_buckets]]
+binding = "SNAPSHOTS"             
+bucket_name = "simyou-snapshots"
