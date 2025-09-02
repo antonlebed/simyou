@@ -1,10 +1,14 @@
+/// <reference types="@cloudflare/workers-types" />
 import type { BattleRequest, BattleResponse } from '../types';
-import { securityHeaders, withCORS, hmacSession } from '../_lib/security';
+import { securityHeaders, corsFor, hmacSession } from '../_lib/security';
 import { sampleGhost, saveSnapshotAndMeta, saveReplay } from '../_lib/store';
 import { runServerSim } from '../_lib/sim';
-export const onRequestPost: PagesFunction<{ DB:D1Database; SNAPSHOTS:R2Bucket; SIMYOU_CACHE:KVNamespace; SESSION_SECRET:string; ALLOWED_ORIGIN?:string }> = async ({ request, env }) => {
-const origin = request.headers.get('origin') ?? env.ALLOWED_ORIGIN ?? '*';
-const headers = { 'Content-Type':'application/json', ...securityHeaders, ...withCORS(origin) };
+export const onRequestOptions: PagesFunction = async ({ request, env }) => {
+const headers = { ...securityHeaders, ...corsFor(env as { ALLOWED_ORIGIN?: string }, request) };
+return new Response(null, { status: 204, headers });
+};
+export const onRequestPost: PagesFunction = async ({ request, env }) => {
+const headers = { 'Content-Type':'application/json', ...securityHeaders, ...corsFor(env as { ALLOWED_ORIGIN?: string }, request) };
 try {
 const body = await request.json() as BattleRequest;
 if (!body?.game_slug || !body?.player_setup) return new Response(JSON.stringify({ ok:false, error:'bad payload' }), { status:400, headers });
@@ -12,7 +16,8 @@ if (JSON.stringify(body).length > 64 * 1024) return new Response(JSON.stringify(
 const session = (request.headers.get('x-simyou-session') ?? '').trim();
 const token = (request.headers.get('x-simyou-session-token') ?? '').trim();
 if (!session || !token) return new Response(JSON.stringify({ ok:false, error:'missing session' }), { status:401, headers });
-const expected = await hmacSession(session, env.SESSION_SECRET);
+const { SESSION_SECRET } = (env as unknown as { SESSION_SECRET: string });
+const expected = await hmacSession(session, SESSION_SECRET);
 if (expected !== token) return new Response(JSON.stringify({ ok:false, error:'invalid session' }), { status:401, headers });
 const ghost = await sampleGhost(env, body.game_slug, body.stage_band, body.last_outcome);
 const simOut = await runServerSim(body, ghost);
