@@ -1,63 +1,89 @@
 #root {
-  max-width: 960px;
+  max-width: 1100px;
+  height: 100svh;
+  box-sizing: border-box;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 2.5rem 1.25rem 3rem;
+}
+
+.hub {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .hub-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
   gap: 1rem;
 }
 
 .hub-header h1 {
   margin: 0;
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, hsl(var(--brand-1)), hsl(var(--brand-2)) 60%, #fff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .tagline {
   margin: 0.25rem 0 0 0;
-  color: #888;
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.98rem;
 }
 
 .hub-nav {
   display: flex;
   gap: 1rem;
+  justify-content: center;
+  grid-column: 1 / -1;
 }
 
 .games h2 {
-  margin-top: 2rem;
+  margin: 0;
+  margin-top: 2.5rem; /* distance from nav to subheader */
 }
 
 .game-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem; /* distance from subheader to cards */
 }
 
 .game-card {
-  border: 1px solid #2e2e2e;
-  border-radius: 8px;
-  padding: 1rem;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.1rem 1.1rem 1rem;
   text-align: left;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset,
+              0 10px 30px rgba(0,0,0,0.25);
+  backdrop-filter: blur(6px);
 }
 
 .game-card h3 {
   margin-top: 0;
 }
+.game-card p {
+  color: var(--muted);
+  min-height: 3.25rem;
+}
 
 .soon-btn {
   width: 100%;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 .hub-footer {
-  margin-top: 3rem;
+  margin-top: auto;
   text-align: center;
-  color: #888;
+  color: var(--muted);
 }
 
-.tests {
-  margin-top: 2rem;
-}
+.tests { display: none; }

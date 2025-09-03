@@ -37,8 +37,8 @@ Supporting modules:
 - `functions/types.d.ts` — shared request/response types
 
 ## Frontend
-- `src/App.tsx` — hub page with “Coming soon” cards; links to `/privacy/` and `/research/`
-- `public/privacy/`, `public/research/` — minimal placeholder pages
+- `src/App.tsx` — hub page with centered hero, animated starfield background, styled game cards; links to `/privacy/` and `/research/`
+- `public/privacy/`, `public/research/` — styled static pages matching hub theme
 
 ## Deployment (Pages)
 - Build command: `npm run build`
@@ -53,4 +53,4 @@ Supporting modules:
 - Replace `_lib/sim.ts` with game logic
 - Optional: `/api/replay/:id`
 - Implement export worker + cron to write JSONL to R2
-- Minimal UI controls to trigger session/battle locally
+- Developer smoke tests are now console-based; the hub contains no test UI

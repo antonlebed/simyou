@@ -1,12 +1,47 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>Privacy</title>
+<title>Privacy • SimYou</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<main style="max-width:720px;margin:2rem auto;padding:0 1rem;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;">
-  <h1>Privacy</h1>
-  <p>No accounts, no PII. Guest session only. Opt-out controls data export.</p>
-  <p>Gameplay requests include a random session id stored locally. We mint a short-lived token to prevent abuse; we do not store personal identifiers.</p>
-  <p>See <a href="/research/">Research</a> for how anonymized gameplay data is shared.</p>
-</main>
+<style>
+  :root{--bg0:#0b0c10;--bg1:#11131a;--muted:#9aa0aa;--brand-1:100 100% 65%;--brand-2:258 100% 72%}
+  body{margin:0;background:linear-gradient(180deg,var(--bg0),var(--bg1));color:rgba(255,255,255,.92);font-family:system-ui,Avenir,Helvetica,Arial,sans-serif;line-height:1.5;font-weight:400;overflow-x:hidden;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  a{font-weight:500;color:#646cff;text-decoration:none}
+  a:hover{color:#535bf2}
+  .wrap{max-width:1100px;margin:0 auto;padding:2.5rem 1rem 3rem;min-height:100svh;box-sizing:border-box;display:flex;flex-direction:column}
+  .brand{ text-align:center }
+  .brand h1{margin:0;font-weight:800;letter-spacing:.5px;background:linear-gradient(90deg,hsl(var(--brand-1)),hsl(var(--brand-2)) 60%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:3.2em;line-height:1.1}
+  .tag{margin:.25rem 0 0 0;color:var(--muted);font-size:.98rem}
+  nav{display:flex;gap:1rem;justify-content:center;margin-top:1rem}
+  h2{margin:0;margin-top:2.5rem}
+  .card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1rem 1.25rem;margin-top:1rem}
+  footer{margin-top:auto;text-align:center;color:var(--muted)}
+</style>
+<canvas id="sf" style="position:fixed;inset:0;pointer-events:none;z-index:0" aria-hidden="true"></canvas>
+<script type="module">
+  const c=document.getElementById('sf');const ctx=c.getContext('2d',{alpha:true});
+  let stars=[],reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;let last=performance.now();
+  function resize(){const dpr=Math.max(1,Math.min(2,devicePixelRatio||1));c.width=innerWidth*dpr;c.height=innerHeight*dpr;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';ctx.setTransform(dpr,0,0,dpr,0,0);const n=Math.min(450,Math.max(140,Math.floor(innerWidth*innerHeight*0.00012)));stars=Array.from({length:n},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vy:20+Math.random()*40,r:.4+Math.random()*1.4,p:Math.random()*Math.PI*2,s:.3+Math.random()*0.7}))}
+  function draw(s,t){const a=.4+.6*(.5+.5*Math.sin(s.p+t*s.s));ctx.globalAlpha=a;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.9)';ctx.fill()}
+  function frame(now){const t=now/1000,dt=Math.min(.1,Math.max(.001,(now-last)/1000));ctx.clearRect(0,0,innerWidth,innerHeight);for(const s of stars){draw(s,t);if(!reduced){s.y+=s.vy*dt;if(s.y>innerHeight+2){s.y=-2;s.x=Math.random()*innerWidth}}}last=now;requestAnimationFrame(frame)}
+  addEventListener('resize',resize);resize();requestAnimationFrame(frame);
+</script>
+<div class="wrap">
+  <div class="brand">
+    <h1>SimYou</h1>
+    <p class="tag">Minimalistic gaming... for science</p>
+  </div>
+  <nav aria-label="Primary"><a href="/">Games</a><a href="/research/">Research</a><a href="/privacy/">Privacy</a></nav>
+  <h2>Privacy</h2>
+  <section class="card">
+    <p>No accounts, no PII. Guest session only. You can opt-out of research exports; gameplay still works.</p>
+    <ul>
+      <li>Requests include a random <em>session id</em> kept in your browser.</li>
+      <li>Server issues a short-lived token to prevent abuse; we avoid storing personal identifiers.</li>
+      <li>We may publish anonymized gameplay snapshots for research; never raw IPs or user agents.</li>
+    </ul>
+    <p>See <a href="/research/">Research</a> for dataset details.</p>
+  </section>
+  <footer><small>© <script>document.write(new Date().getFullYear())</script> SimYou</small></footer>
+</div>
 
 

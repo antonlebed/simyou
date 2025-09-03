@@ -2,11 +2,15 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color: rgba(255, 255, 255, 0.92);
+  --bg0: #0b0c10;
+  --bg1: #11131a;
+  --brand-1: 100 100% 65%;
+  --brand-2: 258 100% 72%;
+  --card-bg: rgba(255,255,255,0.04);
+  --card-border: rgba(255,255,255,0.08);
+  --muted: #9aa0aa;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -24,11 +28,13 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  background: linear-gradient(180deg, var(--bg0), var(--bg1));
+  overflow-x: hidden;
 }
+
+/* Subtle starfield background with parallax layers */
+/* CSS starfield removed; replaced by canvas component. */
 
 h1 {
   font-size: 3.2em;
@@ -42,7 +48,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #121418;
   cursor: pointer;
   transition: border-color 0.25s;
 }

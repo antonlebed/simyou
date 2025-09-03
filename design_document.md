@@ -27,8 +27,7 @@
 ### 3.1 The Hub (SimYou)
 
 * A single landing page listing available games.
-* “Play as Guest” always visible.
-* **Now Trending** (last 24h plays) to direct attention.
+* Prominent centered brand + tagline. Subtle animated starfield background with reduced‑motion fallback.
 * **Research** & **Privacy** links persistently visible.
 
 ### 3.2 Per-Game Loop (authoritative server)
@@ -142,7 +141,7 @@
 
 ## 11) Visual & Audio Direction
 
-* **Style:** Clean, readable, “playful minimalism.”
+* **Style:** Clean, readable, “playful minimalism.” Hero gradient type and soft glass cards.
 * **Unit iconography:** Flat-color silhouettes + distinct shapes for readability.
 * **SFX:** Light, tactile clicks & pops; optional mute; “win/loss” stingers.
 * **Motion:** Snappy, short animations keyed to replay events; “reduced motion” preference honored.
@@ -233,13 +232,13 @@
 
 ## Appendix A) Current State vs Plan (Sep 2025)
 
-- Hub UI exists with placeholder game cards and links to `/privacy` and `/research`.
+- Hub UI with centered hero, animated starfield, styled game cards; links to `/privacy` and `/research` (matching theme).
 - API endpoints implemented as stubs:
   - `/api/session` issues HMAC token for a provided session id.
   - `/api/battle` validates headers/payload, runs a deterministic stub sim, and returns a replay/result.
 - CORS supports multiple allowed origins via comma-separated `ALLOWED_ORIGIN`. OPTIONS preflights return 204.
 - Storage is stubbed: `_lib/store.ts` does not yet write to D1/KV/R2.
 - Export worker not yet implemented.
-- Build & local dev flow uses: `npm run build` then `npx wrangler pages dev dist`.
+- Build & local dev flow uses: `npm run build` then `npx wrangler pages dev dist`. Smoke tests are console-only (no in-UI buttons).
 
 What’s next (short): implement real storage in `_lib/store.ts`, wire sim logic, optional `/api/replay/:id`, then export Worker and daily cron.

@@ -80,4 +80,5 @@ export type ReplayV1 = {
 ## Notes
 - Payloads are capped at 64KB (server enforces before heavy work).
 - Storage and sim are stubs; results are deterministic placeholders.
-- CORS origins are derived from `ALLOWED_ORIGIN` (comma-separated list). For local dev, set `http://localhost:5173`.
+- The hub UI no longer includes built-in smoke-test buttons. For local smoke tests, use DevTools console (see README) or curl.
+- CORS origins are derived from `ALLOWED_ORIGIN` (comma-separated list). For Pages dev, `npx wrangler pages dev dist` serves both UI and API on the same origin.
