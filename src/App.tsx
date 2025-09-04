@@ -5,7 +5,7 @@ function App() {
     <main className="hub">
       <header className="hub-header">
         <div style={{gridColumn:'1 / -1'}}>
-          <h1>SimYou</h1>
+          <img src="/brand/logo.png" alt="SimYou" className="brand-logo" />
           <p className="tagline">Minimalistic gaming... for science</p>
         </div>
         <nav className="hub-nav" aria-label="Primary">

@@ -27,7 +27,7 @@
 ### 3.1 The Hub (SimYou)
 
 * A single landing page listing available games.
-* Prominent centered brand + tagline. Subtle animated starfield background with reduced‑motion fallback.
+* Prominent centered brand image + tagline. Subtle animated starfield background with reduced‑motion fallback and a gentle lunar glow on the logo.
 * **Research** & **Privacy** links persistently visible.
 
 ### 3.2 Per-Game Loop (authoritative server)
@@ -144,7 +144,7 @@
 * **Style:** Clean, readable, “playful minimalism.” Hero gradient type and soft glass cards.
 * **Unit iconography:** Flat-color silhouettes + distinct shapes for readability.
 * **SFX:** Light, tactile clicks & pops; optional mute; “win/loss” stingers.
-* **Motion:** Snappy, short animations keyed to replay events; “reduced motion” preference honored.
+* **Motion:** Snappy, short animations keyed to replay events; “reduced motion” preference honored. Logo glow is subtle and respects reduced motion.
 
 ---
 
@@ -232,7 +232,7 @@
 
 ## Appendix A) Current State vs Plan (Sep 2025)
 
-- Hub UI with centered hero, animated starfield, styled game cards; links to `/privacy` and `/research` (matching theme).
+- Hub UI with centered hero, logo image (transparent PNG) with soft glow, animated starfield (deep purple gradient, multi‑hue stars), styled game cards; links to `/privacy` and `/research` (matching theme).
 - API endpoints implemented as stubs:
   - `/api/session` issues HMAC token for a provided session id.
   - `/api/battle` validates headers/payload, runs a deterministic stub sim, and returns a replay/result.

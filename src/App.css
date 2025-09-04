@@ -10,6 +10,8 @@
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  position: relative;
+  z-index: 1; /* ensure content sits above starfield canvas */
 }
 
 .hub-header {
@@ -35,6 +37,26 @@
   color: var(--muted);
   text-align: center;
   font-size: 0.98rem;
+}
+
+.brand-logo {
+  display: block;
+  margin: 0 auto;
+  width: min(520px, 70vw);
+  height: auto;
+  /* cooler lunar blue core with faint warm rim */
+  filter: drop-shadow(0 0 22px rgba(132, 186, 255, 0.25))
+          drop-shadow(0 0 54px rgba(255, 234, 160, 0.12));
+  animation: brandGlow 7.5s ease-in-out infinite alternate;
+}
+
+@keyframes brandGlow {
+  0% { filter: drop-shadow(0 0 16px rgba(132, 186, 255, 0.18)) drop-shadow(0 0 40px rgba(255, 234, 160, 0.08)); }
+  100% { filter: drop-shadow(0 0 30px rgba(132, 186, 255, 0.32)) drop-shadow(0 0 70px rgba(255, 234, 160, 0.14)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-logo { animation: none; }
 }
 
 .hub-nav {

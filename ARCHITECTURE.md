@@ -37,8 +37,9 @@ Supporting modules:
 - `functions/types.d.ts` — shared request/response types
 
 ## Frontend
-- `src/App.tsx` — hub page with centered hero, animated starfield background, styled game cards; links to `/privacy/` and `/research/`
-- `public/privacy/`, `public/research/` — styled static pages matching hub theme
+- `src/App.tsx` — hub page with centered hero, logo image, animated starfield background, styled game cards; links to `/privacy/` and `/research/`
+- `public/privacy/`, `public/research/` — styled static pages matching hub theme; logo image and favicon linked directly
+- Brand assets: `public/brand/logo.png` (source of truth, transparent PNG); favicons at `public/favicon.png`
 
 ## Deployment (Pages)
 - Build command: `npm run build`
@@ -54,3 +55,4 @@ Supporting modules:
 - Optional: `/api/replay/:id`
 - Implement export worker + cron to write JSONL to R2
 - Developer smoke tests are now console-based; the hub contains no test UI
+ - Optional: add `apple-touch-icon.png` and legacy `favicon.ico` for broader icon support

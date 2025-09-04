@@ -82,3 +82,8 @@ export type ReplayV1 = {
 - Storage and sim are stubs; results are deterministic placeholders.
 - The hub UI no longer includes built-in smoke-test buttons. For local smoke tests, use DevTools console (see README) or curl.
 - CORS origins are derived from `ALLOWED_ORIGIN` (comma-separated list). For Pages dev, `npx wrangler pages dev dist` serves both UI and API on the same origin.
+
+### Static assets (frontend)
+- Brand images live under `/public/brand/` (e.g., `/brand/logo.png`).
+- Favicons live at the root of `/public/` (e.g., `/favicon.png`).
+- The hub and static pages preload `/brand/logo.png` for snappier first paint.
