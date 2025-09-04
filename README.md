@@ -40,12 +40,11 @@ wrangler d1 execute SIMYOU --file schema.sql --remote
 - `POST /api/battle` → validates payload/session, runs deterministic stub sim, returns replay+result
 - OPTIONS preflights return 204 with CORS headers
 
-See `API_REFERENCE.md` for request/response types.
+See the API page for endpoints and dataset schema: `/api/` (or open `public/api/index.html` locally). See `API_REFERENCE.md` for deeper type details.
 
 ## Hub UI & Smoke Test
 - The hub (`src/App.tsx`) lists games with “Coming soon” buttons.
-- A "Run API smoke test" button calls `/api/session` then `/api/battle` and prints the JSON result.
-- CLI smoke test (alternative):
+- CLI smoke test:
 ```bash
 SESSION=$(uuidgen)
 TOKEN=$(curl -s "http://127.0.0.1:8788/api/session" -H "x-simyou-session: $SESSION" | jq -r .token)

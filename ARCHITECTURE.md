@@ -38,8 +38,8 @@ Supporting modules:
 
 ## Frontend
 - `src/App.tsx` — hub page with centered hero, clickable logo, animated starfield background, styled game cards.
-- Global footer nav (Home, Privacy, Research): implemented in React and mirrored on static pages; layout/styles centralized in `public/site.css`.
-- `public/privacy/`, `public/research/` — styled static pages matching hub theme; both use the shared footer and clickable logo.
+- Global footer nav (Home, Privacy, Research, API): implemented in React and mirrored on static pages; layout/styles centralized in `public/site.css`.
+- `public/privacy/`, `public/research/`, `public/api/` — styled static pages matching hub theme; all use the shared footer and clickable logo.
 - Brand assets: `public/brand/logo.png` (source of truth, transparent PNG); favicons at `public/favicon.png`
 
 ## Deployment (Pages)
@@ -54,6 +54,6 @@ Supporting modules:
 - Implement real `_lib/store.ts` (hashing, R2 put, D1 rows, KV indices)
 - Replace `_lib/sim.ts` with game logic
 - Optional: `/api/replay/:id`
-- Implement export worker + cron to write JSONL to R2
+- Implement export worker + cron to write JSONL to R2 (daily ~23:59 EDT)
 - Developer smoke tests are now console-based; the hub contains no test UI
  - Optional: add `apple-touch-icon.png` and legacy `favicon.ico` for broader icon support

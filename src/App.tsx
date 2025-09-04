@@ -16,18 +16,18 @@ function App() {
         <h2>Games</h2>
         <div className="game-grid">
           <article className="game-card">
-            <h3>Auto Critters</h3>
-            <p>SAP-like auto-battler. Build then watch the server replay.</p>
+            <h3>Troop Commander</h3>
+            <p>Grow and draft a squad of troops to break through enemy tower defenses.</p>
             <button className="soon-btn" disabled>Coming soon</button>
           </article>
           <article className="game-card">
-            <h3>Path Scout</h3>
-            <p>Puzzle roguelite. Ghosts reveal traps they hit.</p>
+            <h3>Tower Forge</h3>
+            <p>Build and draft powerful towers to hold the line against incoming troops.</p>
             <button className="soon-btn" disabled>Coming soon</button>
           </article>
           <article className="game-card">
-            <h3>Deck Duel (Snapshot)</h3>
-            <p>Face a recorded deck and scripted line of play.</p>
+            <h3>Troops &amp; Towers</h3>
+            <p>Draft both troops and towers and race other players—whose fortress will fall first?</p>
             <button className="soon-btn" disabled>Coming soon</button>
           </article>
         </div>
@@ -40,6 +40,7 @@ function App() {
           <a href="/">Home</a>
           <a href="/privacy/">Privacy</a>
           <a href="/research/">Research</a>
+          <a href="/api/">API</a>
         </nav>
         <small>© {new Date().getFullYear()} SimYou</small>
       </footer>

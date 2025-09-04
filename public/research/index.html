@@ -1,6 +1,6 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>Open Data • SimYou</title>
+<title>Research • SimYou</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="preload" as="image" href="/brand/logo.png">
@@ -34,18 +34,22 @@
     <a href="/" aria-label="Home"><img class="brand-logo" src="/brand/logo.png" alt="SimYou"></a>
     <p class="tag">Minimalistic gaming... for science</p>
   </div>
-  <h2>Open Data</h2>
+  <h2>Research</h2>
   <section class="card">
-    <p>Daily JSONL shards in R2 under <code>public-dataset/</code>. Schema: <code>SnapshotV1</code>. Replays optional.</p>
+    <p>
+      We share anonymized gameplay <strong>snapshots</strong> with the community. These records are designed to be useful for
+      AI research and data analysis while protecting player privacy.
+    </p>
     <ul>
-      <li>Fields: <code>game_slug, stage_band, last_outcome, run_step, client_build, created_at(rounded), snapshot{v,game_v,seed,actions,initial_state?,result}</code></li>
-      <li>No PII. No persistent identity across runs.</li>
-      <li>License: CC BY 4.0 (or CC0). Export cadence: daily ~02:00 UTC.</li>
+      <li><strong>Open and free.</strong> Anyone can explore, learn, and build with the data.</li>
+      <li><strong>Privacy‑first.</strong> No accounts, no PII, no persistent identity across runs.</li>
+      <li><strong>Made for research.</strong> Structured to support reproducible experiments and model training.</li>
+      <li><strong>Always improving.</strong> We iterate on schema and docs to keep the dataset best‑in‑class.</li>
     </ul>
-    <p>Implementation details live in the project docs. Contributions welcome.</p>
+    <p>Looking for endpoint details, schemas, or export cadence? See the <a href="/api/">API</a> page.</p>
   </section>
   <footer>
-    <nav aria-label="Footer"><a href="/">Home</a><a href="/privacy/">Privacy</a><a href="/research/">Research</a></nav>
+    <nav aria-label="Footer"><a href="/">Home</a><a href="/privacy/">Privacy</a><a href="/research/">Research</a><a href="/api/">API</a></nav>
     <small>© <script>document.write(new Date().getFullYear())</script> SimYou</small>
   </footer>
 </div>

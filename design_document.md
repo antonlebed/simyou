@@ -28,7 +28,7 @@
 
 * A single landing page listing available games.
 * Prominent centered brand image + tagline. Subtle animated starfield background with reduced‑motion fallback and a gentle lunar glow on the logo.
-* **Research** & **Privacy** links persistently visible.
+* **Research**, **Privacy**, and **API** links persistently visible.
 
 ### 3.2 Per-Game Loop (authoritative server)
 
@@ -77,18 +77,17 @@
 
 ## 6) Games in the Hub (MVP & beyond)
 
-### 6.1 Launch Game — **“Auto Critters”** (SAP-like)
+### 6.1 Launch Games (MVP)
 
-* **Theme:** Playful creatures with simple stats and on-attack/on-faint effects.
-* **Build Phase:** Buy, sell, re-roll, position five slots.
-* **Battle:** Server sim returns event log; client animates.
-* **Bands:** Turn brackets; ghost selection uses soft pooling.
-* **Knobs for tuning:** Free re-rolls, allowed copies, shop rarity weights, effect caps.
+* **Troop Commander:** Grow and draft troops to break through enemy tower defenses.
+* **Tower Forge:** Build and draft towers to withstand incoming troop offense.
+* **Troops & Towers:** Draft both troops and towers and race other players.
 
 ### 6.2 Next Games (2–6 weeks)
 
 * **Path Scout:** Puzzle roguelite where ghosts reveal traps they hit (async co-op flavor).
 * **Deck Duel (Snapshot):** Oppose a recorded deck + scripted line of play; player gets one hint per turn.
+* **Critters:** SAP-style monster battler.
 
 **Content Cadence:** Tiny balance patches and 1–2 new units/mechanics weekly to keep discovery alive.
 
@@ -118,7 +117,7 @@
 * **Dataset:** Daily **JSONL** shards (and later **Parquet**) with:
   `game_slug, stage_band, last_outcome, run_step, client_build, created_at(rounded), snapshot{v,game_v,seed,actions,initial_state?,result}`
   *No IPs, no user agents, no exact timestamps, no session IDs.*
-* **License:** CC BY 4.0 (or CC0 if you want maximum openness).
+* **License:** CC BY 4.0.
 * **Where:** Public R2 prefix and/or mirrored to Hugging Face Datasets.
 * **Differential Privacy:** Apply only to *published aggregates* (e.g., players per band), not to raw snapshots.
 
@@ -172,7 +171,7 @@
 * **Bands:** 4–6 brackets by turn.
 * **Replay event set:** spawn, move, attack, damage, death, status, win/loss.
 * **Hub:** Trending, Game cards, Privacy/Research pages.
-* **Open Data:** Daily JSONL export, license page.
+* **Open Data:** Daily JSONL export (CC BY 4.0), API page.
 * **Safety:** Size caps, version gate, rate limiting; Turnstile toggleable.
 
 ---

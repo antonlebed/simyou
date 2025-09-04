@@ -1,6 +1,6 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>Privacy • SimYou</title>
+<title>API • SimYou</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="preload" as="image" href="/brand/logo.png">
@@ -34,28 +34,43 @@
     <a href="/" aria-label="Home"><img class="brand-logo" src="/brand/logo.png" alt="SimYou"></a>
     <p class="tag">Minimalistic gaming... for science</p>
   </div>
-  <h2>Privacy</h2>
+  <h2>API</h2>
   <section class="card">
-    <h3 style="margin-top:0">What we do</h3>
+    <h3 style="margin-top:0">Overview</h3>
+    <p>This page documents endpoints and the open dataset format used by SimYou.</p>
+
+    <h3>Endpoints</h3>
     <ul>
-      <li><strong>Completely anonymous.</strong> No account required. We don’t ask for your name, email, or phone.</li>
-      <li><strong>Guest sessions only.</strong> A random session id lives in your browser so the game works. It isn’t tied to you.</li>
-      <li><strong>Only de‑identified gameplay snapshots are saved.</strong> They power async multiplayer and research.</li>
-      <li><strong>Your runs can help science.</strong> We share anonymized data publicly so others can learn from it.</li>
-      <li><strong>Opt‑out anytime.</strong> You can opt‑out of research exports and keep playing normally.</li>
+      <li><strong>GET</strong> <code>/api/session</code> — issue short‑lived token for a client‑generated session id.</li>
+      <li><strong>POST</strong> <code>/api/battle</code> — validate payload, run server sim, return result + replay.</li>
+      <li><strong>OPTIONS</strong> — preflight; returns 204 with CORS headers.</li>
+    </ul>
+    <p>All endpoints are served by Cloudflare Pages Functions under <code>/api/*</code>.</p>
+
+    <h3>Auth & headers</h3>
+    <ul>
+      <li>Send <code>x-simyou-session</code> with a random UUID per browser.</li>
+      <li>Use the returned <code>token</code> as <code>x-simyou-session-token</code> on write endpoints.</li>
+      <li>CORS: allowed origins via <code>ALLOWED_ORIGIN</code>; preflights are cached (Max-Age: 86400).</li>
     </ul>
 
-    <h3>What we do not collect</h3>
+    <h3>Dataset (snapshots)</h3>
     <ul>
-      <li>No names, emails, phone numbers, or login credentials.</li>
-      <li>No precise timestamps tied to you, no user agent strings in the dataset, no IPs in public data.</li>
+      <li>Format: daily JSONL shards (optional Parquet later)</li>
+      <li>Location: public R2 under <code>public-dataset/</code></li>
+      <li>License: CC BY 4.0</li>
+      <li>Cadence: daily (23:59 EDT)</li>
     </ul>
 
-    <h3>Light technical notes</h3>
+    <h3>Schema (brief)</h3>
+    <p>Fields include <code>game_slug, stage_band, last_outcome, run_step, client_build, created_at(rounded)</code> and a <code>snapshot</code> object <em>(v1)</em> with <code>game_v, seed, actions, initial_state?</code>, optional <code>result</code>. Replays may be published separately.</p>
+
+    <h3>Roadmap / TBD</h3>
     <ul>
-      <li>Requests include a random <em>session id</em> stored locally. The server issues a short‑lived token to prevent abuse.</li>
-      <li>Saved snapshots are stripped of personal identifiers and contain only the decisions needed to reconstruct a match.</li>
-      <li>Public exports use rounded times and compact fields. See the <a href="/api/">API</a> page for schema and license.</li>
+      <li>Optional <code>/api/replay/:id</code> endpoint</li>
+      <li>Parquet mirrors alongside JSONL</li>
+      <li>Export worker + daily cron</li>
+      <li>Additional rate limits and Turnstile if needed</li>
     </ul>
   </section>
   <footer>
@@ -63,5 +78,6 @@
     <small>© <script>document.write(new Date().getFullYear())</script> SimYou</small>
   </footer>
 </div>
+
 
 
