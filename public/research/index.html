@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="preload" as="image" href="/brand/logo.png">
+<link rel="stylesheet" href="/site.css">
 <style>
   :root{--bg0:#0b0c10;--bg1:#11131a;--muted:#9aa0aa;--brand-1:100 100% 65%;--brand-2:258 100% 72%}
   body{margin:0;background:linear-gradient(180deg,var(--bg0),var(--bg1));color:rgba(255,255,255,.92);font-family:system-ui,Avenir,Helvetica,Arial,sans-serif;line-height:1.5;font-weight:400;overflow-x:hidden;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
@@ -13,7 +14,7 @@
   .brand{ text-align:center }
   .brand h1{margin:0;font-weight:800;letter-spacing:.5px;background:linear-gradient(90deg,hsl(var(--brand-1)),hsl(var(--brand-2)) 60%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:3.2em;line-height:1.1}
   .tag{margin:.25rem 0 0 0;color:var(--muted);font-size:.98rem}
-  nav{display:flex;gap:1rem;justify-content:center;margin-top:1rem}
+  /* footer nav styles are centralized in /site.css */
   h2{margin:0;margin-top:2.5rem}
   .card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1rem 1.25rem;margin-top:1rem}
   footer{margin-top:auto;text-align:center;color:var(--muted)}
@@ -30,10 +31,9 @@
 </script>
 <div class="wrap">
   <div class="brand">
-    <img src="/brand/logo.png" alt="SimYou" style="display:block;margin:0 auto;width:min(520px,70vw);height:auto;filter:drop-shadow(0 0 22px rgba(132,186,255,.25)) drop-shadow(0 0 54px rgba(255,234,160,.12))">
+    <a href="/" aria-label="Home"><img class="brand-logo" src="/brand/logo.png" alt="SimYou"></a>
     <p class="tag">Minimalistic gaming... for science</p>
   </div>
-  <nav aria-label="Primary"><a href="/">Games</a><a href="/research/">Research</a><a href="/privacy/">Privacy</a></nav>
   <h2>Open Data</h2>
   <section class="card">
     <p>Daily JSONL shards in R2 under <code>public-dataset/</code>. Schema: <code>SnapshotV1</code>. Replays optional.</p>
@@ -44,7 +44,10 @@
     </ul>
     <p>Implementation details live in the project docs. Contributions welcome.</p>
   </section>
-  <footer><small>© <script>document.write(new Date().getFullYear())</script> SimYou</small></footer>
+  <footer>
+    <nav aria-label="Footer"><a href="/">Home</a><a href="/privacy/">Privacy</a><a href="/research/">Research</a></nav>
+    <small>© <script>document.write(new Date().getFullYear())</script> SimYou</small>
+  </footer>
 </div>
 
 

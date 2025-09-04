@@ -37,8 +37,9 @@ Supporting modules:
 - `functions/types.d.ts` — shared request/response types
 
 ## Frontend
-- `src/App.tsx` — hub page with centered hero, logo image, animated starfield background, styled game cards; links to `/privacy/` and `/research/`
-- `public/privacy/`, `public/research/` — styled static pages matching hub theme; logo image and favicon linked directly
+- `src/App.tsx` — hub page with centered hero, clickable logo, animated starfield background, styled game cards.
+- Global footer nav (Home, Privacy, Research): implemented in React and mirrored on static pages; layout/styles centralized in `public/site.css`.
+- `public/privacy/`, `public/research/` — styled static pages matching hub theme; both use the shared footer and clickable logo.
 - Brand assets: `public/brand/logo.png` (source of truth, transparent PNG); favicons at `public/favicon.png`
 
 ## Deployment (Pages)

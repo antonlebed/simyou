@@ -39,36 +39,13 @@
   font-size: 0.98rem;
 }
 
-.brand-logo {
-  display: block;
-  margin: 0 auto;
-  width: min(520px, 70vw);
-  height: auto;
-  /* cooler lunar blue core with faint warm rim */
-  filter: drop-shadow(0 0 22px rgba(132, 186, 255, 0.25))
-          drop-shadow(0 0 54px rgba(255, 234, 160, 0.12));
-  animation: brandGlow 7.5s ease-in-out infinite alternate;
-}
+/* brand logo glow moved to /public/site.css for cross-page consistency */
 
-@keyframes brandGlow {
-  0% { filter: drop-shadow(0 0 16px rgba(132, 186, 255, 0.18)) drop-shadow(0 0 40px rgba(255, 234, 160, 0.08)); }
-  100% { filter: drop-shadow(0 0 30px rgba(132, 186, 255, 0.32)) drop-shadow(0 0 70px rgba(255, 234, 160, 0.14)); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .brand-logo { animation: none; }
-}
-
-.hub-nav {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  grid-column: 1 / -1;
-}
+/* top nav removed in favor of footer nav */
 
 .games h2 {
   margin: 0;
-  margin-top: 2.5rem; /* distance from nav to subheader */
+  margin-top: 2rem; /* comfortable gap below hero */
 }
 
 .game-grid {
@@ -107,5 +84,7 @@
   text-align: center;
   color: var(--muted);
 }
+
+/* footer layout is standardized in /public/site.css */
 
 .tests { display: none; }

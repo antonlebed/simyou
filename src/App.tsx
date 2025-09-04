@@ -5,14 +5,11 @@ function App() {
     <main className="hub">
       <header className="hub-header">
         <div style={{gridColumn:'1 / -1'}}>
-          <img src="/brand/logo.png" alt="SimYou" className="brand-logo" />
+          <a href="/" aria-label="Home">
+            <img src="/brand/logo.png" alt="SimYou" className="brand-logo" />
+          </a>
           <p className="tagline">Minimalistic gaming... for science</p>
         </div>
-        <nav className="hub-nav" aria-label="Primary">
-          <a href="/">Games</a>
-          <a href="/research/">Research</a>
-          <a href="/privacy/">Privacy</a>
-        </nav>
       </header>
 
       <section className="games">
@@ -39,6 +36,11 @@ function App() {
       {/* Dev-only test hook; comment-in locally if needed */}
 
       <footer className="hub-footer">
+        <nav aria-label="Footer">
+          <a href="/">Home</a>
+          <a href="/privacy/">Privacy</a>
+          <a href="/research/">Research</a>
+        </nav>
         <small>© {new Date().getFullYear()} SimYou</small>
       </footer>
     </main>

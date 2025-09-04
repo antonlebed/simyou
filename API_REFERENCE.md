@@ -87,3 +87,4 @@ export type ReplayV1 = {
 - Brand images live under `/public/brand/` (e.g., `/brand/logo.png`).
 - Favicons live at the root of `/public/` (e.g., `/favicon.png`).
 - The hub and static pages preload `/brand/logo.png` for snappier first paint.
+- Shared presentation styles (logo glow, footer layout) are centralized in `/public/site.css` and used by both the React app and static pages.
