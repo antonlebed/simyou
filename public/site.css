@@ -42,7 +42,6 @@ html {
   background: linear-gradient(180deg, var(--bg0, #0b0c10), var(--bg1, #11131a));
   min-height: 100%;
   background-color: var(--bg0, #0b0c10);
-  overscroll-behavior-y: contain;
   overscroll-behavior-x: none;
   -webkit-tap-highlight-color: transparent;
   height: 100%;
@@ -54,8 +53,7 @@ body {
   background: linear-gradient(180deg, var(--bg0, #0b0c10), var(--bg1, #11131a));
   background-color: var(--bg0, #0b0c10);
   overflow-x: hidden;
-  overflow-y: hidden; /* prevent root scrolling; use inner scroller */
-  overscroll-behavior-y: contain;
+  overflow-y: auto; /* desktop uses root scroll */
   -webkit-overflow-scrolling: touch;
 }
 
@@ -71,19 +69,26 @@ body {
 .wrap, #root {
   position: relative;
   z-index: 1;
-  height: 100vh;
-  height: 100svh;
-  height: 100dvh;
-  overflow: auto; /* isolate scroll inside content wrapper */
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
+}
+
+/* On iOS Safari only, use an internal scroller to avoid rubber-band issues */
+@supports (-webkit-touch-callout: none) {
+  @media (hover: none) and (pointer: coarse) {
+    html, body { height: 100%; overflow: hidden; }
+    .wrap, #root {
+      height: 100vh;
+      height: 100svh;
+      height: 100dvh;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+    }
+  }
 }
 
 /* Mitigate iOS scroll jank when bouncing at page edges */
 @supports (-webkit-touch-callout: none) {
-  html, body, .wrap, #root {
-    overscroll-behavior-y: contain;
-  }
+  html, body, .wrap, #root { overscroll-behavior-y: contain; }
 }
 
 /* Alternative/standardized card container to match Home game cards */

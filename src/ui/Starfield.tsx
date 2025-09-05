@@ -24,6 +24,7 @@ export function Starfield(): ReactElement {
     let animationFrame = 0
     let stars: Star[] = []
     let isReduced = false
+    // Draw gradient in canvas (matches static pages) so appearance is uniform
     let bgGradient: CanvasGradient | null = null
     let viewportWidth = window.innerWidth
     let viewportHeight = window.innerHeight
