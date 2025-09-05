@@ -1,1 +1,0 @@
-{"root":["./functions/types.d.ts","./functions/_lib/security.ts","./functions/_lib/sim.ts","./functions/_lib/store.ts","./functions/api/battle.ts","./functions/api/session.ts","./env.d.ts"],"version":"5.8.3"}
