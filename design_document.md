@@ -143,7 +143,7 @@
 * **Style:** Clean, readable, “playful minimalism.” Hero gradient type and soft glass cards.
 * **Unit iconography:** Flat-color silhouettes + distinct shapes for readability.
 * **SFX:** Light, tactile clicks & pops; optional mute; “win/loss” stingers.
-* **Motion:** Snappy, short animations keyed to replay events; “reduced motion” preference honored. Logo glow is subtle and respects reduced motion.
+* **Motion:** Snappy, short animations keyed to replay events; “reduced motion” preference honored. Logo glow is subtle and respects reduced motion. Background starfield is fixed behind content and preserves positions across viewport changes to avoid jank.
 
 ---
 

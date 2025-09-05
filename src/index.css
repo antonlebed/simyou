@@ -30,7 +30,9 @@ body {
   margin: 0;
   min-width: 320px;
   background: linear-gradient(180deg, var(--bg0), var(--bg1));
+  background-color: var(--bg0);
   overflow-x: hidden;
+  overscroll-behavior-y: contain;
 }
 
 /* Subtle starfield background with parallax layers */

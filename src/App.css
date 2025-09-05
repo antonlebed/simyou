@@ -1,17 +1,16 @@
 #root {
-  max-width: 1100px;
-  height: 100svh;
   box-sizing: border-box;
-  margin: 0 auto;
-  padding: 2.5rem 1.25rem 3rem;
 }
 
 .hub {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
   position: relative;
   z-index: 1; /* ensure content sits above starfield canvas */
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 3rem;
+  min-height: 100%;
 }
 
 .hub-header {
@@ -55,16 +54,7 @@
   margin-top: 1rem; /* distance from subheader to cards */
 }
 
-.game-card {
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 1.1rem 1.1rem 1rem;
-  text-align: left;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-  box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset,
-              0 10px 30px rgba(0,0,0,0.25);
-  backdrop-filter: blur(6px);
-}
+/* .game-card visual styles are centralized in /public/site.css */
 
 .game-card h3 {
   margin-top: 0;

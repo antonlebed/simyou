@@ -1,7 +1,8 @@
 <!doctype html>
 <meta charset="utf-8">
 <title>Research • SimYou</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0c10">
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="preload" as="image" href="/brand/logo.png">
 <link rel="stylesheet" href="/site.css">
@@ -10,7 +11,7 @@
   body{margin:0;background:linear-gradient(180deg,var(--bg0),var(--bg1));color:rgba(255,255,255,.92);font-family:system-ui,Avenir,Helvetica,Arial,sans-serif;line-height:1.5;font-weight:400;overflow-x:hidden;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
   a{font-weight:500;color:#646cff;text-decoration:none}
   a:hover{color:#535bf2}
-  .wrap{max-width:1100px;margin:0 auto;padding:2.5rem 1rem 3rem;min-height:100svh;box-sizing:border-box;display:flex;flex-direction:column}
+  .wrap{max-width:1100px;margin:0 auto;padding:2.5rem 1.25rem 3rem;min-height:100vh;min-height:100svh;min-height:100dvh;box-sizing:border-box;display:flex;flex-direction:column}
   .brand{ text-align:center }
   .brand h1{margin:0;font-weight:800;letter-spacing:.5px;background:linear-gradient(90deg,hsl(var(--brand-1)),hsl(var(--brand-2)) 60%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:3.2em;line-height:1.1}
   .tag{margin:.25rem 0 0 0;color:var(--muted);font-size:.98rem}
@@ -19,11 +20,12 @@
   .card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1rem 1.25rem;margin-top:1rem}
   footer{margin-top:auto;text-align:center;color:var(--muted)}
 </style>
-<canvas id="sf" style="position:fixed;inset:0;pointer-events:none;z-index:-1" aria-hidden="true"></canvas>
+<canvas id="sf" class="starfield" aria-hidden="true"></canvas>
 <script type="module">
   const c=document.getElementById('sf');const ctx=c.getContext('2d',{alpha:true});
   let stars=[],reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;let last=performance.now();
-  function resize(){const dpr=Math.max(1,Math.min(2,devicePixelRatio||1));c.width=innerWidth*dpr;c.height=innerHeight*dpr;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';ctx.setTransform(dpr,0,0,dpr,0,0);const n=Math.min(450,Math.max(140,Math.floor(innerWidth*innerHeight*0.00012)));stars=Array.from({length:n},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vy:20+Math.random()*40,r:.4+Math.random()*1.4,p:Math.random()*Math.PI*2,s:.3+Math.random()*0.7}))}
+  let vw=innerWidth,vh=innerHeight,resizing=false;
+  function resize(){if(resizing)return;resizing=true;requestAnimationFrame(()=>{const dpr=Math.max(1,Math.min(2,devicePixelRatio||1));const nw=innerWidth,nh=innerHeight;c.width=nw*dpr;c.height=nh*dpr;c.style.width=nw+'px';c.style.height=nh+'px';ctx.setTransform(dpr,0,0,dpr,0,0);const target=Math.min(450,Math.max(140,Math.floor(nw*nh*0.00012)));const sx=vw?nw/vw:1,sy=vh?nh/vh:1;for(const s of stars){s.x*=sx;s.y*=sy}if(stars.length<target){for(let i=stars.length;i<target;i++){const r=Math.random();ctx;stars.push({x:Math.random()*nw,y:Math.random()*nh,vy:20+Math.random()*40,r:.4+Math.random()*1.4,p:Math.random()*Math.PI*2,s:.3+Math.random()*0.7})}}else if(stars.length>target){stars.length=target}vw=nw;vh=nh;resizing=false;})}
   function draw(s,t){const a=.4+.6*(.5+.5*Math.sin(s.p+t*s.s));ctx.globalAlpha=a;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);const r=Math.random();ctx.fillStyle=r<.6?'rgba(255,255,255,.9)':(r<.85?'rgba(188,160,255,.95)':'rgba(150,205,255,.95)');ctx.fill()}
   let bg=null;function bggrad(){const g=ctx.createLinearGradient(0,0,0,innerHeight);g.addColorStop(0,'#0b0a15');g.addColorStop(.5,'#121327');g.addColorStop(1,'#0b0c16');bg=g}
   function frame(now){const t=now/1000,dt=Math.min(.1,Math.max(.001,(now-last)/1000));if(!bg)bggrad();ctx.fillStyle=bg;ctx.fillRect(0,0,innerWidth,innerHeight);for(const s of stars){draw(s,t);if(!reduced){s.y+=s.vy*dt;if(s.y>innerHeight+2){s.y=-2;s.x=Math.random()*innerWidth}}}last=now;requestAnimationFrame(frame)}

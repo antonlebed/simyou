@@ -39,6 +39,8 @@ Supporting modules:
 ## Frontend
 - `src/App.tsx` — hub page with centered hero, clickable logo, animated starfield background, styled game cards.
 - Global footer nav (Home, Privacy, Research, API): implemented in React and mirrored on static pages; layout/styles centralized in `public/site.css`.
+- Scrolling model: a single internal scroll container on `#root` (React) and `.wrap` (static) using `overflow:auto` and `overscroll-behavior: contain` to prevent iOS rubber-band flicker and jump-to-top. Root `html/body` scrolling is disabled.
+- Starfield: fixed canvas at z-index 0 (`.starfield`), content containers (`#root`/`.wrap`/`.hub`) stack above with z-index 1. Resize is throttled and star positions are preserved across viewport changes.
 - `public/privacy/`, `public/research/`, `public/api/` — styled static pages matching hub theme; all use the shared footer and clickable logo.
 - Brand assets: `public/brand/logo.png` (source of truth, transparent PNG); favicons at `public/favicon.png`
 

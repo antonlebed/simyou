@@ -25,42 +25,72 @@ export function Starfield(): ReactElement {
     let stars: Star[] = []
     let isReduced = false
     let bgGradient: CanvasGradient | null = null
+    let viewportWidth = window.innerWidth
+    let viewportHeight = window.innerHeight
+    let resizeQueued = false
 
     const mql = window.matchMedia('(prefers-reduced-motion: reduce)')
     const updateReduced = () => { isReduced = mql.matches }
     updateReduced()
     mql.addEventListener?.('change', updateReduced)
 
-    function resizeCanvas(): void {
+    function applyResize(): void {
       const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1))
-      const { innerWidth, innerHeight } = window
-      canvas.width = Math.floor(innerWidth * dpr)
-      canvas.height = Math.floor(innerHeight * dpr)
-      canvas.style.width = innerWidth + 'px'
-      canvas.style.height = innerHeight + 'px'
+      const newWidth = window.innerWidth
+      const newHeight = window.innerHeight
+
+      canvas.width = Math.floor(newWidth * dpr)
+      canvas.height = Math.floor(newHeight * dpr)
+      canvas.style.width = newWidth + 'px'
+      canvas.style.height = newHeight + 'px'
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      const area = innerWidth * innerHeight
+      const area = newWidth * newHeight
       const density = 0.00012 // stars per pixel
       const targetCount = Math.min(450, Math.max(140, Math.floor(area * density)))
 
-      stars = Array.from({ length: targetCount }, () => {
-        const r = Math.random()
-        let color = 'rgba(255,255,255,0.9)'
-        if (r >= 0.6 && r < 0.85) color = 'rgba(188, 160, 255, 0.95)'
-        else if (r >= 0.85) color = 'rgba(150, 205, 255, 0.95)'
-        return {
-          x: Math.random() * innerWidth,
-          y: Math.random() * innerHeight,
-          speedY: 20 + Math.random() * 40, // px per second (visible but calm)
-          radius: Math.random() * 1.4 + 0.4,
-          twinklePhase: Math.random() * Math.PI * 2,
-          twinkleSpeed: 0.3 + Math.random() * 0.7,
-          color,
-        }
-      })
+      // Scale existing stars to preserve relative positions
+      const scaleX = viewportWidth > 0 ? newWidth / viewportWidth : 1
+      const scaleY = viewportHeight > 0 ? newHeight / viewportHeight : 1
+      for (const s of stars) {
+        s.x *= scaleX
+        s.y *= scaleY
+      }
 
-      updateBackgroundGradient(innerWidth, innerHeight)
+      // Adjust number of stars gradually (add/remove diff)
+      if (stars.length < targetCount) {
+        const toAdd = targetCount - stars.length
+        for (let i = 0; i < toAdd; i++) {
+          const r = Math.random()
+          let color = 'rgba(255,255,255,0.9)'
+          if (r >= 0.6 && r < 0.85) color = 'rgba(188, 160, 255, 0.95)'
+          else if (r >= 0.85) color = 'rgba(150, 205, 255, 0.95)'
+          stars.push({
+            x: Math.random() * newWidth,
+            y: Math.random() * newHeight,
+            speedY: 20 + Math.random() * 40,
+            radius: Math.random() * 1.4 + 0.4,
+            twinklePhase: Math.random() * Math.PI * 2,
+            twinkleSpeed: 0.3 + Math.random() * 0.7,
+            color,
+          })
+        }
+      } else if (stars.length > targetCount) {
+        stars.length = targetCount
+      }
+
+      viewportWidth = newWidth
+      viewportHeight = newHeight
+      updateBackgroundGradient(newWidth, newHeight)
+    }
+
+    function scheduleResize(): void {
+      if (resizeQueued) return
+      resizeQueued = true
+      requestAnimationFrame(() => {
+        resizeQueued = false
+        applyResize()
+      })
     }
 
     function drawStar(s: Star, timeS: number): void {
@@ -104,15 +134,15 @@ export function Starfield(): ReactElement {
       animationFrame = requestAnimationFrame(render)
     }
 
-    resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
+    applyResize()
+    window.addEventListener('resize', scheduleResize)
     animationFrame = requestAnimationFrame(render)
 
     // simplified: no visibilitychange adjustments
 
     return () => {
       cancelAnimationFrame(animationFrame)
-      window.removeEventListener('resize', resizeCanvas)
+      window.removeEventListener('resize', scheduleResize)
       mql.removeEventListener?.('change', updateReduced)
       // no visibility listener to remove
     }
@@ -122,7 +152,6 @@ export function Starfield(): ReactElement {
     <canvas
       ref={canvasRef}
       className="starfield"
-      style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0 }}
       aria-hidden="true"
     />
   )
