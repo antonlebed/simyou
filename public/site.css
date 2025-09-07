@@ -32,6 +32,52 @@ footer nav {
 
 footer small { display: block; }
 
+/* Social icon plates */
+.social-icons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 0.4rem 0 0.6rem;
+}
+
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255,255,255,0.85);
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  font-size: 18px; /* icon size */
+  transition: background-color .15s ease, transform .12s ease, border-color .15s ease;
+}
+
+.social-icons a:hover {
+  background-color: rgba(255,255,255,0.98);
+  border-color: rgba(0,0,0,0.22);
+}
+
+.social-icons a:active {
+  transform: translateY(1px);
+}
+
+/* Improve keyboard accessibility */
+.social-icons a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Brand colors */
+.social-icons a.youtube { color: #ff0000; }
+.social-icons a.discord { color: #5865F2; }
+.social-icons a.x-twitter { color: #000000; }
+.social-icons a.github { color: #181717; }
+
+/* Unified plate: all icons share the same semi-white background for consistent look */
+
 
 /*
   Base: unify background and overscroll behavior across React and static pages

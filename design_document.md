@@ -29,6 +29,7 @@
 * A single landing page listing available games.
 * Prominent centered brand image + tagline. Subtle animated starfield background with reduced‑motion fallback and a gentle lunar glow on the logo.
 * **Research**, **Privacy**, and **API** links persistently visible.
+* Social links (YouTube, Discord, X, GitHub) shown as colored brand icons on unified semi‑white square plates, positioned above footer nav across all pages.
 
 ### 3.2 Per-Game Loop (authoritative server)
 
@@ -105,7 +106,7 @@
 
 * **First-run tutorial:** One overlay panel explaining: build → battle → replay.
 * **Keyboard/Touch:** Big tap targets; hotkeys for re-roll (R), pause (P), help (?).
-* **Accessibility:** High-contrast palette, color-blind friendly symbols on units/effects, reduced motion toggle.
+* **Accessibility:** High-contrast palette, color-blind friendly symbols on units/effects, reduced motion toggle. Social icons include focus-visible outlines and sufficient contrast via plate backgrounds.
 * **Latency masking:** “Preparing battle…” shimmer while server sim runs (fast; most sims under a few ms).
 
 ---

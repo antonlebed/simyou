@@ -8,7 +8,7 @@ function App() {
           <a href="/" aria-label="Home">
             <img src="/brand/logo.png" alt="SimYou" className="brand-logo" />
           </a>
-          <p className="tagline">Minimalistic gaming... for science</p>
+          <p className="tagline">Gaming for science</p>
         </div>
       </header>
 
@@ -36,6 +36,20 @@ function App() {
       {/* Dev-only test hook; comment-in locally if needed */}
 
       <footer className="hub-footer">
+        <div className="social-icons" aria-label="Social links">
+          <a className="youtube" href="https://www.youtube.com/@sim-you" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <i className="fa-brands fa-youtube" aria-hidden="true"></i>
+          </a>
+          <a className="discord" href="https://discord.gg/rygBR8wnJE" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+            <i className="fa-brands fa-discord" aria-hidden="true"></i>
+          </a>
+          <a className="x-twitter" href="https://x.com/simyou_" target="_blank" rel="noopener noreferrer" aria-label="X">
+            <i className="fa-brands fa-x-twitter" aria-hidden="true"></i>
+          </a>
+          <a className="github" href="https://github.com/antonlebed/simyou" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <i className="fa-brands fa-github" aria-hidden="true"></i>
+          </a>
+        </div>
         <nav aria-label="Footer">
           <a href="/">Home</a>
           <a href="/privacy/">Privacy</a>
