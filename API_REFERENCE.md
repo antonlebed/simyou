@@ -17,6 +17,7 @@ All endpoints are served by Cloudflare Pages Functions under `/api/*`.
 ## Caching
 - API responses set `Cache-Control: no-store` to prevent stale/mixed client state.
 - Static asset caching is configured via `_headers` (see “Static assets (frontend)” below).
+ - Build pipeline auto-stamps non-hashed asset URLs with a build id to guarantee freshness between deploys.
 
 ## Endpoints
 
@@ -89,11 +90,12 @@ export type ReplayV1 = {
 - Scrolling model: desktop uses root page scroll; on iOS touch devices we switch to an internal scroll container on `#root` (React) and `.wrap` (static) to avoid rubber‑band flicker. Horizontal scrolling is disabled site‑wide. `scrollbar-gutter: stable` is applied (with a `calc(100vw - 100%)` fallback) to prevent layout shifts when the vertical scrollbar appears.
 
 ### Static assets (frontend)
-- Brand images live under `/public/brand/` (e.g., `/brand/logo.png`). Served with long-lived immutable caching.
-- Planetary nav images live under `/public/planets/` and already include their labels (e.g., `home_earth.png`, `research_mars.png`, `api_jupiter.png`, `privacy_saturn.png`). Served with long-lived immutable caching.
-- Favicons live at the root of `/public/` (e.g., `/favicon.png`).
+- Brand images live under `/public/brand/` (e.g., `/brand/logo.png`). Served with `must-revalidate` so updated assets show up immediately after deploys.
+- Planetary nav images live under `/public/planets/` and already include their labels (e.g., `home_earth.png`, `research_mars.png`, `api_jupiter.png`, `privacy_saturn.png`). Served with `must-revalidate`.
+- Favicons live at the root of `/public/` (e.g., `/favicon.png`) and `apple-touch-icon.png` — also `must-revalidate`.
 - The hub and static pages preload the logo and planet images for faster first paint.
 - Shared presentation styles (logo glow, planetary nav, social icon plates) are centralized in `/public/site.css` and used by both the React app and static pages. `site.css` is set to `must-revalidate` (fresh on new builds, cached between navigations).
-- JS bundles are emitted by Vite with content hashes and are served as `immutable` with a 1‑year TTL.
+- JS bundles are emitted by Vite with content hashes and are served as `immutable` with a 1‑year TTL (under `/assets/*`). We do not mutate hashed bundles post‑build.
+- The build adds `?v=<build-id>` to image/icon URLs in built HTML and SPA code; the build id is the git short SHA (fallback: timestamp).
 - Font Awesome (6.7.2) is loaded via CDN in `index.html` and static pages to render brand icons.
 - Footer contains social links (YouTube, Discord, X, GitHub); navigation is now a top “planetary” bar beneath the hero.

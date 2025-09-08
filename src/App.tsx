@@ -6,7 +6,7 @@ function App() {
       <header className="hub-header">
         <div style={{gridColumn:'1 / -1'}}>
           <a href="/" aria-label="Home">
-            <img src="/brand/logo.png" alt="SimYou" className="brand-logo" />
+            <img src={`/brand/logo.png?v=${import.meta.env.VITE_BUILD_ID}`} alt="SimYou" className="brand-logo" />
           </a>
           <p className="tagline">Gaming for science</p>
         </div>
@@ -14,19 +14,19 @@ function App() {
           <div className="orbit" aria-hidden="true"></div>
           <div className="track">
             <a href="/" className="earth" aria-label="Home" aria-current="page">
-              <span className="planet-wrap"><img loading="eager" fetchPriority="high" className="planet" src="/planets/home_earth.png" alt="Home" onError={(e)=>{const t=e.currentTarget; t.remove(); const p=t.parentElement; if(p) p.classList.add('fallback')}} /></span>
+              <span className="planet-wrap"><img loading="eager" fetchPriority="high" className="planet" src={`/planets/home_earth.png?v=${import.meta.env.VITE_BUILD_ID}`} alt="Home" onError={(e)=>{const t=e.currentTarget; t.remove(); const p=t.parentElement; if(p) p.classList.add('fallback')}} /></span>
               <span className="label sr-only">Home</span>
             </a>
             <a href="/research/" className="mars" aria-label="Research">
-              <span className="planet-wrap"><img loading="eager" fetchPriority="high" className="planet" src="/planets/research_mars.png" alt="Research" onError={(e)=>{const t=e.currentTarget; t.remove(); const p=t.parentElement; if(p) p.classList.add('fallback')}} /></span>
+              <span className="planet-wrap"><img loading="eager" fetchPriority="high" className="planet" src={`/planets/research_mars.png?v=${import.meta.env.VITE_BUILD_ID}`} alt="Research" onError={(e)=>{const t=e.currentTarget; t.remove(); const p=t.parentElement; if(p) p.classList.add('fallback')}} /></span>
               <span className="label sr-only">Research</span>
             </a>
             <a href="/api/" className="jupiter" aria-label="API">
-              <span className="planet-wrap"><img loading="eager" fetchPriority="high" className="planet" src="/planets/api_jupiter.png" alt="API" onError={(e)=>{const t=e.currentTarget; t.remove(); const p=t.parentElement; if(p) p.classList.add('fallback')}} /></span>
+              <span className="planet-wrap"><img loading="eager" fetchPriority="high" className="planet" src={`/planets/api_jupiter.png?v=${import.meta.env.VITE_BUILD_ID}`} alt="API" onError={(e)=>{const t=e.currentTarget; t.remove(); const p=t.parentElement; if(p) p.classList.add('fallback')}} /></span>
               <span className="label sr-only">API</span>
             </a>
             <a href="/privacy/" className="saturn" aria-label="Privacy">
-              <span className="planet-wrap"><img loading="eager" fetchPriority="high" className="planet" src="/planets/privacy_saturn.png" alt="Privacy" onError={(e)=>{const t=e.currentTarget; t.remove(); const p=t.parentElement; if(p) p.classList.add('fallback')}} /></span>
+              <span className="planet-wrap"><img loading="eager" fetchPriority="high" className="planet" src={`/planets/privacy_saturn.png?v=${import.meta.env.VITE_BUILD_ID}`} alt="Privacy" onError={(e)=>{const t=e.currentTarget; t.remove(); const p=t.parentElement; if(p) p.classList.add('fallback')}} /></span>
               <span className="label sr-only">Privacy</span>
             </a>
           </div>

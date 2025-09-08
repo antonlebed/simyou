@@ -43,7 +43,7 @@ Supporting modules:
 - Scrolling model: desktop uses root page scroll (`html/body`). On iOS Safari (touch devices) we disable root scroll and use an internal scroll container on `#root` (React) and `.wrap` (static) with `overflow:auto` and `overscroll-behavior: contain` to prevent rubber‑band flicker and jump‑to‑top. Horizontal overflow is disabled site‑wide. We reserve space for scrollbars using `scrollbar-gutter: stable`; for browsers without support we fall back to `margin-left: calc(100vw - 100%)` to prevent layout shifts when the vertical scrollbar appears.
 - Starfield: fixed canvas at z-index 0 (`.starfield`), content containers (`#root`/`.wrap`/`.hub`) stack above with z-index 1. Resize is throttled and star positions are preserved across viewport changes.
 - `public/privacy/`, `public/research/`, `public/api/` — styled static pages matching hub theme; all use the shared footer (social-only), clickable logo, and the top planetary nav.
-- Caching model: HTML and `site.css` are `must-revalidate`; JS bundles are hashed and `immutable`; brand/planet images are `immutable` for fast navigation.
+- Caching model: HTML and `site.css` are `must-revalidate`; JS bundles are hashed and `immutable` under `/assets/*` (never mutated post‑build); brand/planet images and icons are `must-revalidate` so new deploys update immediately. The build stamps a build id (`?v=<id>`) onto non‑hashed asset URLs in `dist` HTML and SPA code for reliable cache busting.
 - Font Awesome 6.7.2 is included via CDN in `index.html` and static pages for iconography.
 - Brand assets: `public/brand/logo.png` (source of truth, transparent PNG); favicons at `public/favicon.png`
 
