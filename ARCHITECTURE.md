@@ -13,6 +13,7 @@ This doc captures the current shape of the project and how to build/run it today
 - Build site: `npm run build` → outputs to `dist/`
 - Serve API locally: `npx wrangler pages dev dist`
   - Uses `wrangler.toml` bindings and `.dev.vars` for secrets
+  - Static caching headers are served from `public/_headers` (Pages respects this file in production and `pages dev`)
 
 Key configs:
 - `wrangler.toml` — local bindings and Pages settings
@@ -28,7 +29,7 @@ Key configs:
   - Headers: `x-simyou-session`, `x-simyou-session-token`
   - Body: `BattleRequest`
   - Validates schema and size (<= 64KB), verifies token, runs server-sim stub, stores via stubs, returns `{ ok, result, replay }`
-- OPTIONS for both endpoints return 204 with CORS headers.
+- OPTIONS for both endpoints return 204 with CORS headers. All API responses set `Cache-Control: no-store`.
 
 Supporting modules:
 - `_lib/security.ts` — security headers, dynamic CORS via `corsFor(env, request)`, HMAC helper
@@ -42,6 +43,7 @@ Supporting modules:
 - Scrolling model: a single internal scroll container on `#root` (React) and `.wrap` (static) using `overflow:auto` and `overscroll-behavior: contain` to prevent iOS rubber-band flicker and jump-to-top. Root `html/body` scrolling is disabled.
 - Starfield: fixed canvas at z-index 0 (`.starfield`), content containers (`#root`/`.wrap`/`.hub`) stack above with z-index 1. Resize is throttled and star positions are preserved across viewport changes.
 - `public/privacy/`, `public/research/`, `public/api/` — styled static pages matching hub theme; all use the shared footer (social-only), clickable logo, and the top planetary nav.
+- Caching model: HTML and `site.css` are `must-revalidate`; JS bundles are hashed and `immutable`; brand/planet images are `immutable` for fast navigation.
 - Font Awesome 6.7.2 is included via CDN in `index.html` and static pages for iconography.
 - Brand assets: `public/brand/logo.png` (source of truth, transparent PNG); favicons at `public/favicon.png`
 

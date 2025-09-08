@@ -107,7 +107,7 @@
 * **First-run tutorial:** One overlay panel explaining: build → battle → replay.
 * **Keyboard/Touch:** Big tap targets; hotkeys for re-roll (R), pause (P), help (?).
 * **Accessibility:** High-contrast palette, color-blind friendly symbols on units/effects, reduced motion toggle. Social icons include focus-visible outlines and sufficient contrast via plate backgrounds.
-* **Latency masking:** “Preparing battle…” shimmer while server sim runs (fast; most sims under a few ms).
+* **Latency masking:** “Preparing battle…” shimmer while server sim runs (fast; most sims under a few ms). Static assets use aggressive caching for snappy navigation; HTML/CSS revalidate between builds to avoid stale UI states.
 
 ---
 

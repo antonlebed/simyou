@@ -14,6 +14,10 @@ All endpoints are served by Cloudflare Pages Functions under `/api/*`.
 - Responses include: `Access-Control-Allow-Origin`, `Access-Control-Allow-Methods: GET,POST,OPTIONS`, `Access-Control-Allow-Headers: content-type,x-simyou-session,x-simyou-session-token`, `Access-Control-Max-Age: 86400`, `Vary: Origin`.
 - OPTIONS preflights return `204`.
 
+## Caching
+- API responses set `Cache-Control: no-store` to prevent stale/mixed client state.
+- Static asset caching is configured via `_headers` (see “Static assets (frontend)” below).
+
 ## Endpoints
 
 ### OPTIONS /api/session and /api/battle
@@ -85,10 +89,11 @@ export type ReplayV1 = {
 - Frontend pages share a standardized scroll container and fixed starfield background to ensure stable touch scrolling on mobile.
 
 ### Static assets (frontend)
-- Brand images live under `/public/brand/` (e.g., `/brand/logo.png`).
-- Planetary nav images live under `/public/planets/` and already include their labels (e.g., `home_earth.png`, `research_mars.png`, `api_jupiter.png`, `privacy_saturn.png`).
+- Brand images live under `/public/brand/` (e.g., `/brand/logo.png`). Served with long-lived immutable caching.
+- Planetary nav images live under `/public/planets/` and already include their labels (e.g., `home_earth.png`, `research_mars.png`, `api_jupiter.png`, `privacy_saturn.png`). Served with long-lived immutable caching.
 - Favicons live at the root of `/public/` (e.g., `/favicon.png`).
 - The hub and static pages preload the logo and planet images for faster first paint.
-- Shared presentation styles (logo glow, planetary nav, social icon plates) are centralized in `/public/site.css` and used by both the React app and static pages.
+- Shared presentation styles (logo glow, planetary nav, social icon plates) are centralized in `/public/site.css` and used by both the React app and static pages. `site.css` is set to `must-revalidate` (fresh on new builds, cached between navigations).
+- JS bundles are emitted by Vite with content hashes and are served as `immutable` with a 1‑year TTL.
 - Font Awesome (6.7.2) is loaded via CDN in `index.html` and static pages to render brand icons.
 - Footer contains social links (YouTube, Discord, X, GitHub); navigation is now a top “planetary” bar beneath the hero.

@@ -4,11 +4,11 @@ import { securityHeaders, corsFor, hmacSession } from '../_lib/security';
 import { sampleGhost, saveSnapshotAndMeta, saveReplay } from '../_lib/store';
 import { runServerSim } from '../_lib/sim';
 export const onRequestOptions: PagesFunction = async ({ request, env }) => {
-const headers = { ...securityHeaders, ...corsFor(env as { ALLOWED_ORIGIN?: string }, request) };
+const headers = { 'Cache-Control': 'no-store', ...securityHeaders, ...corsFor(env as { ALLOWED_ORIGIN?: string }, request) };
 return new Response(null, { status: 204, headers });
 };
 export const onRequestPost: PagesFunction = async ({ request, env }) => {
-const headers = { 'Content-Type':'application/json', ...securityHeaders, ...corsFor(env as { ALLOWED_ORIGIN?: string }, request) };
+const headers = { 'Content-Type':'application/json', 'Cache-Control': 'no-store', ...securityHeaders, ...corsFor(env as { ALLOWED_ORIGIN?: string }, request) };
 try {
 const body = await request.json() as BattleRequest;
 if (!body?.game_slug || !body?.player_setup) return new Response(JSON.stringify({ ok:false, error:'bad payload' }), { status:400, headers });
