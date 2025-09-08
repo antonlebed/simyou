@@ -28,8 +28,8 @@
 
 * A single landing page listing available games.
 * Prominent centered brand image + tagline. Subtle animated starfield background with reduced‑motion fallback and a gentle lunar glow on the logo.
-* **Research**, **Privacy**, and **API** links persistently visible.
-* Social links (YouTube, Discord, X, GitHub) shown as colored brand icons on unified semi‑white square plates, positioned above footer nav across all pages.
+* Top planetary navigation under the hero with labeled planet images for **Home**, **Research**, **API**, **Privacy**. Even spacing with a dashed orbit line between first and last planet; current page shows a bright circular selection ring.
+* Social links (YouTube, Discord, X, GitHub) shown as colored brand icons on unified semi‑white square plates in the footer; nav is no longer in the footer.
 
 ### 3.2 Per-Game Loop (authoritative server)
 

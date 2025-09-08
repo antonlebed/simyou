@@ -6,6 +6,10 @@
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" as="image" href="/brand/logo.png">
+<link rel="preload" as="image" href="/planets/home_earth.png">
+<link rel="preload" as="image" href="/planets/research_mars.png">
+<link rel="preload" as="image" href="/planets/api_jupiter.png">
+<link rel="preload" as="image" href="/planets/privacy_saturn.png">
 <link rel="stylesheet" href="/site.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous">
 <style>
@@ -18,7 +22,7 @@
   .brand h1{margin:0;font-weight:800;letter-spacing:.5px;background:linear-gradient(90deg,hsl(var(--brand-1)),hsl(var(--brand-2)) 60%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:3.2em;line-height:1.1}
   .tag{margin:.25rem 0 0 0;color:var(--muted);font-size:.98rem}
   /* footer nav styles are centralized in /site.css */
-  h2{margin:0;margin-top:2.5rem}
+  h2{margin:0;margin-top:1.5rem}
   .card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:1rem 1.25rem;margin-top:1rem}
   footer{margin-top:auto;text-align:center;color:var(--muted)}
 </style>
@@ -38,6 +42,27 @@
     <a href="/" aria-label="Home"><img class="brand-logo" src="/brand/logo.png" alt="SimYou"></a>
     <p class="tag">Gaming for science</p>
   </div>
+  <nav class="astro-nav" aria-label="Navigation">
+    <div class="orbit" aria-hidden="true"></div>
+    <div class="track">
+      <a href="/" class="earth" aria-label="Home">
+        <span class="planet-wrap"><img class="planet" src="/planets/home_earth.png" alt="Home" onerror="this.remove(); this.parentElement.classList.add('fallback')"></span>
+        <span class="label sr-only">Home</span>
+      </a>
+      <a href="/research/" class="mars" aria-label="Research">
+        <span class="planet-wrap"><img class="planet" src="/planets/research_mars.png" alt="Research" onerror="this.remove(); this.parentElement.classList.add('fallback')"></span>
+        <span class="label sr-only">Research</span>
+      </a>
+      <a href="/api/" class="jupiter" aria-label="API">
+        <span class="planet-wrap"><img class="planet" src="/planets/api_jupiter.png" alt="API" onerror="this.remove(); this.parentElement.classList.add('fallback')"></span>
+        <span class="label sr-only">API</span>
+      </a>
+      <a href="/privacy/" class="saturn" aria-label="Privacy" aria-current="page">
+        <span class="planet-wrap"><img class="planet" src="/planets/privacy_saturn.png" alt="Privacy" onerror="this.remove(); this.parentElement.classList.add('fallback')"></span>
+        <span class="label sr-only">Privacy</span>
+      </a>
+    </div>
+  </nav>
   <h2>Privacy</h2>
   <section class="card">
     <h3 style="margin-top:0">What we do</h3>
@@ -69,7 +94,7 @@
       <a class="x-twitter" href="https://x.com/simyou_" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
       <a class="github" href="https://github.com/antonlebed/simyou" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
     </div>
-    <nav aria-label="Footer"><a href="/">Home</a><a href="/privacy/">Privacy</a><a href="/research/">Research</a><a href="/api/">API</a></nav>
+    
     <small>© <script>document.write(new Date().getFullYear())</script> SimYou</small>
   </footer>
 </div>

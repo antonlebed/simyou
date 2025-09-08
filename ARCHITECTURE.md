@@ -37,11 +37,11 @@ Supporting modules:
 - `functions/types.d.ts` — shared request/response types
 
 ## Frontend
-- `src/App.tsx` — hub page with centered hero, clickable logo, animated starfield background, styled game cards.
-- Global footer: social links (YouTube, Discord, X, GitHub) rendered via Font Awesome brand icons above the nav (Home, Privacy, Research, API). Shared styles and layout live in `public/site.css`.
+- `src/App.tsx` — hub page with centered hero, clickable logo, animated starfield background, planetary top navigation, styled game cards.
+- Global footer: social links (YouTube, Discord, X, GitHub) rendered via Font Awesome brand icons. Navigation moved to a top “planetary” bar under the hero. Shared styles live in `public/site.css`.
 - Scrolling model: a single internal scroll container on `#root` (React) and `.wrap` (static) using `overflow:auto` and `overscroll-behavior: contain` to prevent iOS rubber-band flicker and jump-to-top. Root `html/body` scrolling is disabled.
 - Starfield: fixed canvas at z-index 0 (`.starfield`), content containers (`#root`/`.wrap`/`.hub`) stack above with z-index 1. Resize is throttled and star positions are preserved across viewport changes.
-- `public/privacy/`, `public/research/`, `public/api/` — styled static pages matching hub theme; all use the shared footer and clickable logo.
+- `public/privacy/`, `public/research/`, `public/api/` — styled static pages matching hub theme; all use the shared footer (social-only), clickable logo, and the top planetary nav.
 - Font Awesome 6.7.2 is included via CDN in `index.html` and static pages for iconography.
 - Brand assets: `public/brand/logo.png` (source of truth, transparent PNG); favicons at `public/favicon.png`
 

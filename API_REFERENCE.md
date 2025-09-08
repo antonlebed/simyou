@@ -86,8 +86,9 @@ export type ReplayV1 = {
 
 ### Static assets (frontend)
 - Brand images live under `/public/brand/` (e.g., `/brand/logo.png`).
+- Planetary nav images live under `/public/planets/` and already include their labels (e.g., `home_earth.png`, `research_mars.png`, `api_jupiter.png`, `privacy_saturn.png`).
 - Favicons live at the root of `/public/` (e.g., `/favicon.png`).
-- The hub and static pages preload `/brand/logo.png` for snappier first paint.
-- Shared presentation styles (logo glow, footer layout, social icon plates) are centralized in `/public/site.css` and used by both the React app and static pages.
+- The hub and static pages preload the logo and planet images for faster first paint.
+- Shared presentation styles (logo glow, planetary nav, social icon plates) are centralized in `/public/site.css` and used by both the React app and static pages.
 - Font Awesome (6.7.2) is loaded via CDN in `index.html` and static pages to render brand icons.
-- Footer includes social links (YouTube, Discord, X, GitHub) above the nav; icons use unified semi‑white square plates with brand colors and accessible focus/hover states.
+- Footer contains social links (YouTube, Discord, X, GitHub); navigation is now a top “planetary” bar beneath the hero.

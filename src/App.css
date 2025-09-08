@@ -47,7 +47,7 @@
 
 .games h2 {
   margin: 0;
-  margin-top: 2rem; /* comfortable gap below hero */
+  margin-top: 1.25rem; /* tighter gap below hero */
 }
 
 .game-grid {
