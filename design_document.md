@@ -108,6 +108,7 @@
 * **Keyboard/Touch:** Big tap targets; hotkeys for re-roll (R), pause (P), help (?).
 * **Accessibility:** High-contrast palette, color-blind friendly symbols on units/effects, reduced motion toggle. Social icons include focus-visible outlines and sufficient contrast via plate backgrounds.
 * **Latency masking:** “Preparing battle…” shimmer while server sim runs (fast; most sims under a few ms). Static assets use aggressive caching for snappy navigation; HTML/CSS revalidate between builds to avoid stale UI states.
+* **Scrolling and layout stability:** Desktop uses root page scroll (`html/body`). On iOS/touch Safari the site uses an internal scroll container on `#root` (React) and `.wrap` (static) with `overflow:auto` and `overscroll-behavior: contain` to avoid rubber‑band flicker and jump‑to‑top. Horizontal scrolling is disabled across pages. We reserve space for vertical scrollbars using `scrollbar-gutter: stable` (with a `calc(100vw - 100%)` fallback) to prevent layout shifts when scrollbars appear.
 
 ---
 

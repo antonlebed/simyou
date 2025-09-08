@@ -23,6 +23,17 @@
   .brand-logo { animation: none; }
 }
 
+/* Ensure consistent box-sizing and prevent padding/border from causing overflow */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Media elements should never overflow their containers */
+img, canvas, svg, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
 /* (footer nav styles removed; nav is now top-of-page) */
 
 /* Social icon plates */
@@ -265,6 +276,8 @@ html {
   overscroll-behavior-x: none;
   -webkit-tap-highlight-color: transparent;
   height: 100%;
+  /* Reserve space for the vertical scrollbar to avoid layout shifts */
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -300,6 +313,8 @@ body {
       height: 100svh;
       height: 100dvh;
       overflow: auto;
+      /* Prevent horizontal scrollbars in the internal scroller on iOS */
+      overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior-y: contain;
     }
@@ -309,6 +324,14 @@ body {
 /* Mitigate iOS scroll jank when bouncing at page edges */
 @supports (-webkit-touch-callout: none) {
   html, body, .wrap, #root { overscroll-behavior-y: contain; }
+}
+
+/* Also reserve gutter for internal scrollers so content doesn't shift when they gain Y scrollbars */
+#root, .wrap { scrollbar-gutter: stable; }
+
+/* Fallback for browsers without scrollbar-gutter support */
+@supports not (scrollbar-gutter: stable) {
+  html { margin-left: calc(100vw - 100%); }
 }
 
 /* Alternative/standardized card container to match Home game cards */

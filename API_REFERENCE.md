@@ -86,7 +86,7 @@ export type ReplayV1 = {
 - Storage and sim are stubs; results are deterministic placeholders.
 - The hub UI no longer includes built-in smoke-test buttons. For local smoke tests, use DevTools console (see README) or curl.
 - CORS origins are derived from `ALLOWED_ORIGIN` (comma-separated list). For Pages dev, `npx wrangler pages dev dist` serves both UI and API on the same origin.
-- Frontend pages share a standardized scroll container and fixed starfield background to ensure stable touch scrolling on mobile.
+- Scrolling model: desktop uses root page scroll; on iOS touch devices we switch to an internal scroll container on `#root` (React) and `.wrap` (static) to avoid rubber‑band flicker. Horizontal scrolling is disabled site‑wide. `scrollbar-gutter: stable` is applied (with a `calc(100vw - 100%)` fallback) to prevent layout shifts when the vertical scrollbar appears.
 
 ### Static assets (frontend)
 - Brand images live under `/public/brand/` (e.g., `/brand/logo.png`). Served with long-lived immutable caching.
